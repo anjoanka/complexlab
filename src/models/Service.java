@@ -2,25 +2,10 @@ package models;
 
 public class Service {
 	private String name;
-	private int price;
+	private double price;
 
-	public Service() {}
-
-	public Service(String name, int price) {
-		setName(name);
-		setPrice(price);
-	}
-
-	@Override
-	public String toString() {
-		return String.format("%-10s - %d", getName(), getPrice());
-	}
-
-	public void setName(String name) {
+	public Service(String name, double price) {
 		this.name = name;
-	}
-
-	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -28,7 +13,12 @@ public class Service {
 		return name;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
+	}
+
+	@Override
+	public String toString() {
+		return name + " - " + price + " USD";
 	}
 }

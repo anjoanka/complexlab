@@ -3,7 +3,7 @@ package commands;
 import models.TouristsManager;
 
 public class TouristsManagerMenuCommand implements Command {
-	private final TouristsManager touristsManager;
+	private TouristsManager touristsManager;
 
 	public TouristsManagerMenuCommand(TouristsManager touristsManager) {
 		this.touristsManager = touristsManager;
@@ -12,5 +12,10 @@ public class TouristsManagerMenuCommand implements Command {
 	@Override
 	public void execute() {
 		touristsManager.menu();
+	}
+
+	@Override
+	public String getDesc() {
+		return "Open Tourists Manager Menu";
 	}
 }

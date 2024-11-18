@@ -1,30 +1,33 @@
 package models;
 
+import commands.Command;
 import utils.Utils;
 
-public class TravelAgency {
-	private TicketsManager ticketsManager;
-	private TouristsManager touristsManager;
+import java.util.List;
 
-	public TravelAgency() {
-		ticketsManager = new TicketsManager();
-		touristsManager = new TouristsManager();
+public class TravelAgency {
+	private List<Command> commands;
+
+	public TravelAgency(List<Command> commands) {
+		this.commands = commands;
 	}
 
 	public void menu() {
 		while (true) {
-			System.out.println("\n --- Travel agency menu --- ");
-			System.out.println(" 0. Exit");
-			System.out.println(" 1. Tickets manager menu");
-			System.out.println(" 2. Tourists manager menu");
-
-			int menuSelect = Utils.enterIntValue("Select an item:", 0, 2);
-
-			switch (menuSelect) {
-				case 0 -> { return; }
-				case 1 -> ticketsManager.menu();
-				case 2 -> touristsManager.menu();
+			System.out.println("--- Travel Agency Menu ---");
+			for (int i = 0; i < commands.size(); i++) {
+				System.out.println((i + 1) + ". " + commands.get(i).getDesc());
 			}
+			System.out.println("0. Exit");
+
+			int choice = Utils.enterIntValue("Select an option: ", 0, commands.size());
+
+			if (choice == 0) {
+				System.out.println("Exiting...");
+				break;
+			}
+
+			commands.get(choice - 1).execute();
 		}
 	}
 }

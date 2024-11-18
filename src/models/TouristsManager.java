@@ -2,33 +2,42 @@ package models;
 
 import utils.Utils;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TouristsManager {
-	private ArrayList<Tourist> tourists;
+	private List<Tourist> tourists;
+
+	public TouristsManager() {
+		tourists = new ArrayList<>();
+	}
 
 	public void menu() {
 		while (true) {
-			System.out.println("\n --- Tourists manager menu --- ");
-			System.out.println(" 0. Exit");
-			System.out.println(" 1. Print tourists");
-			System.out.println(" 2. Tourists menu");
-			System.out.println(" 3. Add new tourist");
-			System.out.println(" 4. Delete tourist");
+			System.out.println("--- Tourists Manager ---");
+			System.out.println("1. Add Tourist");
+			System.out.println("2. Show Tourists");
+			System.out.println("0. Back");
+			int choice = Utils.enterIntValue("Select an option: ", 0, 2);
 
-			int menuSelect = Utils.enterIntValue("Select an item:", 0, 4);
-
-			switch (menuSelect) {
+			switch (choice) {
+				case 1 -> addTourist();
+				case 2 -> showTourists();
 				case 0 -> { return; }
-				case 1 -> printTourists();
-				case 2 -> touristsMenu();
-				case 3 -> addTourist();
-				case 4 -> deleteTourist();
 			}
 		}
 	}
 
-	public void printTourists() {}
-	public void touristsMenu() {}
-	public void addTourist() {}
-	public void deleteTourist() {}
+	private void addTourist() {
+		String name = Utils.enterStringValue("Enter name: ");
+		tourists.add(new Tourist(name));
+		System.out.println("Tourist added successfully!");
+	}
+
+	private void showTourists() {
+		if (tourists.isEmpty()) {
+			System.out.println("No tourists available.");
+		} else {
+			tourists.forEach(System.out::println);
+		}
+	}
 }

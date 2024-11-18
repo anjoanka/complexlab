@@ -3,7 +3,7 @@ package commands;
 import models.TicketsManager;
 
 public class TicketsManagerMenuCommand implements Command {
-	private final TicketsManager ticketsManager;
+	private TicketsManager ticketsManager;
 
 	public TicketsManagerMenuCommand(TicketsManager ticketsManager) {
 		this.ticketsManager = ticketsManager;
@@ -12,5 +12,10 @@ public class TicketsManagerMenuCommand implements Command {
 	@Override
 	public void execute() {
 		ticketsManager.menu();
+	}
+
+	@Override
+	public String getDesc() {
+		return "Open Tickets Manager Menu";
 	}
 }
