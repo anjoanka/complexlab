@@ -7,28 +7,33 @@ public class Utils {
 
     public static int enterIntValue(String message, int min, int max) {
         int value;
-        do {
+        while (true) {
             System.out.print(message);
-            while (!scanner.hasNextInt()) {
-                System.out.print("Invalid input. Try again: ");
-                scanner.next();
+            try {
+                value = Integer.parseInt(scanner.nextLine());
+                if (value >= min && value <= max) {
+                    return value;
+                }
+                System.out.println("Please enter a value between " + min + " and " + max + ".");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer.");
             }
-            value = scanner.nextInt();
-        } while (value < min || value > max);
-        return value;
+        }
     }
 
     public static double enterDoubleValue(String message) {
-        System.out.print(message);
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Invalid input. Try again: ");
-            scanner.next();
+        while (true) {
+            System.out.print(message);
+            try {
+                return Double.parseDouble(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
         }
-        return scanner.nextDouble();
     }
 
     public static String enterStringValue(String message) {
         System.out.print(message);
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

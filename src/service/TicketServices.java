@@ -1,13 +1,15 @@
-package models;
+package service;
 
+import models.Ticket;
 import utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketsManager {
+public class TicketServices {
     private List<Ticket> tickets;
 
-    public TicketsManager() {
+    public TicketServices() {
         tickets = new ArrayList<>();
     }
 
@@ -27,10 +29,15 @@ public class TicketsManager {
         }
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
     private void addTicket() {
         String destination = Utils.enterStringValue("Enter destination: ");
         double price = Utils.enterDoubleValue("Enter price: ");
-        tickets.add(new Ticket(destination, price));
+        Ticket ticket = new Ticket(destination, price);
+        tickets.add(ticket);
         System.out.println("Ticket added successfully!");
     }
 
