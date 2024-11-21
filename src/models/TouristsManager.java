@@ -15,31 +15,13 @@ public class TouristsManager {
 		this.ticketServices = ticketServices;
 	}
 
-	public void menu() {
-		while (true) {
-			System.out.println("--- Tourists Manager ---");
-			System.out.println("1. Add Tourist");
-			System.out.println("2. Show Tourists");
-			System.out.println("3. Tourist Chooses Ticket");
-			System.out.println("0. Back");
-			int choice = Utils.enterIntValue("Select an option: ", 0, 3);
-
-			switch (choice) {
-				case 1 -> addTourist();
-				case 2 -> showTourists();
-				case 3 -> touristChoosesTicket();
-				case 0 -> { return; }
-			}
-		}
-	}
-
-	private void addTourist() {
+	public void addTourist() {
 		String name = Utils.enterStringValue("Enter name: ");
 		tourists.add(new Tourist(name));
 		System.out.println("Tourist added successfully!");
 	}
 
-	private void showTourists() {
+	public void showTourists() {
 		if (tourists.isEmpty()) {
 			System.out.println("No tourists available.");
 		} else {
