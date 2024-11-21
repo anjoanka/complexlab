@@ -29,9 +29,9 @@ public class TouristsManager {
 		}
 	}
 
-	private void touristChoosesTicket() {
+	public void touristChoosesService() {
 		if (tourists.isEmpty()) {
-			System.out.println("No tourists available to choose tickets.");
+			System.out.println("No tourists available to choose services.");
 			return;
 		}
 
@@ -42,20 +42,33 @@ public class TouristsManager {
 		int touristIndex = Utils.enterIntValue("Enter tourist number: ", 1, tourists.size()) - 1;
 		Tourist selectedTourist = tourists.get(touristIndex);
 
-		if (ticketServices.getTickets().isEmpty()) {
-			System.out.println("No tickets available for selection.");
+		String serviceName = Utils.enterStringValue("Enter service name: ");
+		double servicePrice = Utils.enterDoubleValue("Enter service price: ");
+		Service service = new Service(serviceName, servicePrice);
+
+		selectedTourist.addService(service);
+		System.out.println("Service successfully added to tourist!");
+	}
+
+	public void showServicesOfTourist() {
+		if (tourists.isEmpty()) {
+			System.out.println("No tourists available.");
 			return;
 		}
 
-		System.out.println("Available tickets:");
-		List<Ticket> tickets = ticketServices.getTickets();
-		for (int i = 0; i < tickets.size(); i++) {
-			System.out.println((i + 1) + ". " + tickets.get(i));
+		System.out.println("Select a tourist to view services:");
+		for (int i = 0; i < tourists.size(); i++) {
+			System.out.println((i + 1) + ". " + tourists.get(i).getName());
 		}
-		int ticketIndex = Utils.enterIntValue("Enter ticket number: ", 1, tickets.size()) - 1;
-		Ticket selectedTicket = tickets.get(ticketIndex);
+		int touristIndex = Utils.enterIntValue("Enter tourist number: ", 1, tourists.size()) - 1;
+		Tourist selectedTourist = tourists.get(touristIndex);
 
-		selectedTourist.addTicket(selectedTicket);
-		System.out.println("Ticket successfully added to tourist!");
+		if (selectedTourist.getServices().isEmpty()) {
+			System.out.println("No services available for this tourist.");
+		} else {
+			System.out.println("Services for " + selectedTourist.getName() + ":");
+			selectedTourist.getServices().forEach(System.out::println);
+		}
 	}
+
 }
